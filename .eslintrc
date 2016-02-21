@@ -1,0 +1,21 @@
+{
+  "extends": "rackt",
+  "globals": {
+    "__DEV__": true
+  },
+  "rules": {
+    "react/jsx-uses-react": 1,
+    "react/jsx-uses-vars": 2,
+    "react/jsx-no-undef": 2,
+    "react/wrap-multilines": 2,
+    "no-warning-comments": 1
+  },
+  "plugins": [
+    "react",
+    "jasmine"
+  ],
+  "env": {
+    "jasmine": true,
+    "jest": true
+  }
+}

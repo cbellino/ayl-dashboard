@@ -1,0 +1,28 @@
+@import "../variables.scss";
+
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  padding-right: 16px;
+
+  > div {
+    margin: 16px 0 0 16px;
+    max-width: calc(100% - 16px);
+    min-width: calc(100% - 16px);
+
+    @media (min-width: $layout-breakpoint-xs) {
+      max-width: calc(50% - 16px);
+      min-width: calc(50% - 16px);
+    }
+
+    @media (min-width: $layout-breakpoint-sm) {
+      max-width: calc(33% - 13px);
+      min-width: calc(33% - 13px);
+    }
+
+    @media (min-width: $layout-breakpoint-lg) {
+      max-width: calc(25% - 16px);
+      min-width: calc(25% - 16px);
+    }
+  }
+}

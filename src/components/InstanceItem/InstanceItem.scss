@@ -1,0 +1,19 @@
+.root {
+  border-top: 3px solid transparent;
+  border-radius: 3px;
+}
+
+.expanded {
+  // max-width: calc(100% - 16px) !important;
+  // min-width: calc(100% - 16px) !important;
+}
+
+a {
+  color: inherit;
+  font-weight: 400;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
