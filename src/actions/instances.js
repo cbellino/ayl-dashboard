@@ -2,7 +2,7 @@ import Firebase from 'firebase'
 import { fromJS } from 'immutable'
 
 import actionTypes from '../constants/ActionTypes'
-import FirebaseConstant from '../constants/firebase'
+import FirebaseConstant from '../constants/Firebase'
 
 const instancesRef = new Firebase(FirebaseConstant.BASE_URL).child('instances')
 
