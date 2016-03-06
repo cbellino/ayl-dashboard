@@ -22,9 +22,9 @@ const subtitleStyle = {
 
 class InstanceItem extends Component {
 
-  constructor({ instance }) {
+  constructor() {
     super()
-    this.state = { editing: false, instance: instance }
+    this.state = { editing: false }
   }
 
   startEditing() {
@@ -45,7 +45,8 @@ class InstanceItem extends Component {
   }
 
   render() {
-    const { instance, editing } = this.state
+    const { editing } = this.state
+    const { instance } = this.props
 
     const status = instance.get('status') || 'free'
     const statusHuman = status === 'locked' ?
@@ -74,7 +75,6 @@ class InstanceItem extends Component {
         />*/}
         <CardTitle
           title={`${instance.get('name')} - ${statusHuman}`}
-          subtitle={instance.get('comment')}
           titleColor={color}
           subtitleStyle={subtitleStyle}
         />
@@ -91,7 +91,7 @@ class InstanceItem extends Component {
           editing={editing}
           onStartEditing={this.startEditing.bind(this)}
           onStopEditing={this.stopEditing.bind(this)}
-          onSave={this.handleSave.bind(this, instance)}
+          onSave={this.handleSave.bind(this, this.state.instance)}
         />
       </Card>
     )

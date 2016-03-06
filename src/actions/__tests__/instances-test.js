@@ -2,57 +2,31 @@ import '../../../tools/auto_mock_off'
 
 import { fromJS } from 'immutable'
 import actionTypes from '../../constants/ActionTypes'
-import { setInstance, setInstances, setInstanceUpdatedAt } from '../instances'
+import { updateInstance, updateInstances } from '../instances'
 
-const instance1 = { id: 'instance-1', name: 'instance 1' }
-const instance2 = { id: 'instance-2', name: 'instance 2' }
+const instance1 = { key: 'instance-1', name: 'instance 1' }
+const instance2 = { key: 'instance-2', name: 'instance 2' }
 
-describe('setInstance', () => {
+describe('updateInstance', () => {
 
-  it('return an object with a `type` prop of SET_INSTANCE, and an `instance` prop of type Map', () => {
-    const instance = { ...instance1, updated_at: 1456956439670 }
-    const action = setInstance(instance.id, instance)
+  it('return an object with a `type` prop of UPDATE_INSTANCE, and an `instance` prop of type Map', () => {
+    const instance = fromJS({ ...instance1, updated_at: 1456956439670 })
+    const action = updateInstance(instance)
 
-    expect(action.type).toEqual(actionTypes.SET_INSTANCE)
-    expect(action.id).toEqual(instance.id)
-    expect(action.instance).toEqualImmutable(fromJS(instance))
+    expect(action.type).toEqual(actionTypes.UPDATE_INSTANCE)
+    expect(action.instance).toEqualImmutable(instance)
   })
 
 })
 
-describe('setInstances', () => {
+describe('updateInstances', () => {
 
-  it('return an object with a `type` prop of SET_INSTANCES, and an `instances` prop of type List', () => {
-    const instances = [ instance1, instance2 ]
-    const action = setInstances(instances)
+  it('return an object with a `type` prop of UPDATE_INSTANCES, and an `instances` prop of type List', () => {
+    const instances = fromJS([ instance1, instance2 ])
+    const action = updateInstances(instances)
 
-    expect(action.type).toEqual(actionTypes.SET_INSTANCES)
-    expect(action.instances).toEqualImmutable(fromJS(instances))
-  })
-
-})
-
-describe('setInstanceUpdatedAt', () => {
-
-  it('set a new value if empty', () => {
-    const instance = fromJS(instance1)
-
-    expect(instance.get('updated_at')).toBeUndefined()
-
-    const updatedInstance = setInstanceUpdatedAt(instance)
-
-    expect(updatedInstance.get('updated_at')).toEqual(jasmine.any(Number))
-  })
-
-  it('set the given value', () => {
-    const instance = fromJS(instance1)
-    const timestamp = 1456957967507
-
-    expect(instance.get('updated_at')).toBeUndefined()
-
-    const updatedInstance = setInstanceUpdatedAt(instance, timestamp)
-
-    expect(updatedInstance.get('updated_at')).toEqual(timestamp)
+    expect(action.type).toEqual(actionTypes.UPDATE_INSTANCES)
+    expect(action.instances).toEqualImmutable(instances)
   })
 
 })

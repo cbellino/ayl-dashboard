@@ -16,21 +16,21 @@ class InstanceForm extends Component {
     this.state = { instance: instance }
   }
 
-  setInstance(instance) {
+  updateInstance(instance) {
     this.setState({ instance: instance })
     this.props.onChange(instance)
   }
 
   handleCommentChange(event) {
-    this.setInstance(this.state.instance.set('comment', event.target.value))
+    this.updateInstance(this.state.instance.set('comment', event.target.value))
   }
 
   handleDeveloperChange(event) {
-    this.setInstance(this.state.instance.set('requested_by', event.target.value))
+    this.updateInstance(this.state.instance.set('requested_by', event.target.value))
   }
 
   handleStatusChange(event, index, value) {
-    this.setInstance(this.state.instance.set('status', value))
+    this.updateInstance(this.state.instance.set('status', value))
   }
 
   render() {
@@ -62,7 +62,6 @@ class InstanceForm extends Component {
             <MenuItem value={'used'} primaryText="In use" />
             <MenuItem value={'locked'} primaryText="Locked" />
           </SelectField>
-          {instance.toString()}
         </CardText>
       ) : <div></div>
     )

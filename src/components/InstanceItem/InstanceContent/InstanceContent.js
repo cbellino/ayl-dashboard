@@ -8,26 +8,38 @@ import s from './InstanceContent.scss'
 
 const InstanceContent = ({ instance, editing }) => {
 
-  const username = instance.get('requested_by')
-  const date = new Date(instance.get('updated_at') * 1000)
-  // const instanceUrl = `https://${instance.get('id')}.ayl.io`
-  const userURL = `https://github.com/${username}`
+  let dateNode
+  const updatedAt = instance.get('updated_at')
 
-  return (
-    !editing ? (
-      <CardText>
-        {'Updated on '}
+  if (updatedAt) {
+    dateNode = (
+      <span>
+        {'on '}
         <FormattedDate
-          value={date}
+          value={new Date(updatedAt) * 1000}
           day="numeric"
           month="long"
           year="numeric"
           hour="numeric"
           minute="numeric"
         />
-        {' by '}
-        <a href={userURL} target="_blank">{username}</a>
-        {'.'}
+      </span>
+    )
+  }
+  // const instanceUrl = `https://${instance.get('id')}.ayl.io`
+  const username = instance.get('requested_by')
+  const userURL = `https://github.com/${username}`
+  const userLinkNode = (
+    <a href={userURL} target="_blank">{username}</a>
+  )
+
+
+  return (
+    !editing ? (
+      <CardText>
+        <p className={s.comment}>{instance.get('comment')}</p>
+        {'Updated '}{dateNode}
+        {' by '}{userLinkNode}{'.'}
       </CardText>
     ) : <div></div>
   )

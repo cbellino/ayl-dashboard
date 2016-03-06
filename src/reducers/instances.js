@@ -1,4 +1,4 @@
-import { List } from 'immutable'
+import { List, Map } from 'immutable'
 import actionTypes from '../constants/ActionTypes'
 
 const INITIAL_STATE = List()
@@ -8,10 +8,10 @@ const instancesReducer = (state = INITIAL_STATE, action = {}) => {
     case actionTypes.ADD_INSTANCE:
       return addInstance(state, action.instance)
     case actionTypes.REMOVE_INSTANCE:
-      return removeInstance(state, action.id)
-    case actionTypes.SET_INSTANCE:
-      return setInstance(state, action.id, action.instance)
-    case actionTypes.SET_INSTANCES:
+      return removeInstance(state, action.instance)
+    case actionTypes.UPDATE_INSTANCE:
+      return updateInstance(state, action.instance)
+    case actionTypes.UPDATE_INSTANCES:
       return setInstances(state, action.instances)
   }
 
@@ -19,16 +19,18 @@ const instancesReducer = (state = INITIAL_STATE, action = {}) => {
 }
 
 export const addInstance = (state = List(), instance) => {
-  return state.push(instance)
+  return state.push(Map(instance))
 }
 
-export const removeInstance = (state = List(), id) => {
-  return state.filter(instance => instance.get('id') !== id)
+export const removeInstance = (state = List(), instance) => {
+  return state.filter(current => current.get('key') !== instance.get('key'))
 }
 
-export const setInstance = (state = List(), id, instance) => {
+export const updateInstance = (state = List(), instance) => {
+  instance = Map(instance)
+
   return state.update(
-    state.findIndex(item => item.get('id') === id),
+    state.findIndex(current => current.get('key') === instance.get('key')),
     () => instance
   )
 }

@@ -2,8 +2,9 @@ import { fromJS } from 'immutable'
 import actionTypes from '../../constants/ActionTypes'
 import instancesReducer from '../instances'
 
-const instance1 = fromJS({ id: 'instance-1', name: 'instance 1' })
-const instance2 = fromJS({ id: 'instance-2', name: 'instance 2' })
+const instance1 = fromJS({ key: 'instance-1', name: 'instance 1' })
+const instance2 = fromJS({ key: 'instance-2', name: 'instance 2' })
+const instance3 = fromJS({ key: 'instance-3', name: 'instance 3' })
 
 describe('instancesReducer', () => {
 
@@ -26,7 +27,7 @@ describe('instancesReducer', () => {
   it('handle REMOVE_INSTANCE', () => {
     const action = {
       type: actionTypes.REMOVE_INSTANCE,
-      id: instance1.get('id')
+      instance: instance1
     }
     const initialSate = fromJS([ instance1, instance2 ])
     const state = instancesReducer(initialSate, action)
@@ -34,11 +35,10 @@ describe('instancesReducer', () => {
     expect(state).toEqualImmutable(fromJS([ instance2 ]))
   })
 
-  it('handle SET_INSTANCE', () => {
-    const newInstance = fromJS({ id: 'instance-3', name: 'instance 3' })
+  it('handle UPDATE_INSTANCE', () => {
+    const newInstance = instance3
     const action = {
-      type: actionTypes.SET_INSTANCE,
-      id: 'instance-1',
+      type: actionTypes.UPDATE_INSTANCE,
       instance: newInstance
     }
     const initialSate = fromJS([ instance1 ])
@@ -47,9 +47,9 @@ describe('instancesReducer', () => {
     expect(state).toEqualImmutable(fromJS([ newInstance ]))
   })
 
-  it('handle SET_INSTANCES', () => {
+  it('handle UPDATE_INSTANCES', () => {
     const action = {
-      type: actionTypes.SET_INSTANCES,
+      type: actionTypes.UPDATE_INSTANCES,
       instances: [ instance1, instance2 ]
     }
     const state = instancesReducer(undefined, action)
