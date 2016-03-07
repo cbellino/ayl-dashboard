@@ -4,6 +4,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles'
 import Card from 'material-ui/lib/card/card'
 import CardTitle from 'material-ui/lib/card/card-title'
 import classnames from 'classnames'
+import ga from 'react-ga'
 
 import s from './InstanceItem.scss'
 import InstanceContent from './InstanceContent/InstanceContent'
@@ -28,10 +29,12 @@ class InstanceItem extends Component {
   }
 
   startEditing() {
+    ga.event( { category: 'Instance', action: 'Start editing' } )
     this.setState({ editing: true })
   }
 
   stopEditing() {
+    ga.event( { category: 'Instance', action: 'Stop editing' } )
     this.setState({ editing: false })
   }
 
@@ -40,6 +43,7 @@ class InstanceItem extends Component {
   }
 
   handleSave(instance) {
+    ga.event( { category: 'Instance', action: 'Save' } )
     this.setState({ editing: false })
     this.props.onSave(instance)
   }

@@ -1,10 +1,13 @@
 import 'babel-polyfill'
 import ReactDOM from 'react-dom'
 import FastClick from 'fastclick'
+import ga from 'react-ga'
+import injectTapEventPlugin from 'react-tap-event-plugin'
+
 import Router from './routes'
 import Location from './core/Location'
 import { addEventListener, removeEventListener } from './core/DOMUtils'
-import injectTapEventPlugin from 'react-tap-event-plugin'
+import { googleAnalyticsId } from './config'
 
 let cssContainer = document.getElementById('css')
 const appContainer = document.getElementById('app')
@@ -61,6 +64,8 @@ function run() {
   // https://github.com/zilverline/react-tap-event-plugin
   injectTapEventPlugin()
 
+  ga.initialize(googleAnalyticsId)
+
   // Re-render the app when window.location changes
   const unlisten = Location.listen(location => {
     currentLocation = location
@@ -70,6 +75,7 @@ function run() {
       state: location.state,
       context
     })
+    ga.pageview(currentState.path)
     render(currentState)
   })
 
