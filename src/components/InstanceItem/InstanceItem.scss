@@ -1,12 +1,14 @@
 .root {
   border-top: 3px solid transparent;
   border-radius: 3px;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
-.expanded {
-  // max-width: calc(100% - 16px) !important;
-  // min-width: calc(100% - 16px) !important;
-}
+.expanded {}
 
 a {
   color: inherit;
