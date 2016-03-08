@@ -102,9 +102,22 @@ function run() {
   })
 }
 
+function polyfillAndRun() {
+  if (!window.Intl) {
+    require.ensure([ 'intl' ], (require) => {
+      window.Intl = require('intl')
+      require('intl/locale-data/jsonp/en.js')
+
+      run()
+    })
+  } else {
+    run()
+  }
+}
+
 // Run the application when both DOM is ready and page content is loaded
 if ([ 'complete', 'loaded', 'interactive' ].includes(document.readyState) && document.body) {
-  run()
+  polyfillAndRun()
 } else {
-  document.addEventListener('DOMContentLoaded', run, false)
+  document.addEventListener('DOMContentLoaded', polyfillAndRun, false)
 }
