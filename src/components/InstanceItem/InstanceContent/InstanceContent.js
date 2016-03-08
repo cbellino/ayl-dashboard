@@ -10,6 +10,11 @@ const InstanceContent = ({ instance, editing }) => {
 
   let dateNode
   const updatedAt = instance.get('updated_at')
+  const username = instance.get('requested_by')
+  const userURL = `https://github.com/${username}`
+  const userLinkNode = (
+    <a href={userURL} target="_blank">{username}</a>
+  )
 
   if (updatedAt) {
     dateNode = (
@@ -26,13 +31,6 @@ const InstanceContent = ({ instance, editing }) => {
       </span>
     )
   }
-  // const instanceUrl = `https://${instance.get('id')}.ayl.io`
-  const username = instance.get('requested_by')
-  const userURL = `https://github.com/${username}`
-  const userLinkNode = (
-    <a href={userURL} target="_blank">{username}</a>
-  )
-
 
   return (
     !editing ? (

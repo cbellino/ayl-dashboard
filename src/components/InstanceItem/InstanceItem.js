@@ -68,15 +68,6 @@ class InstanceItem extends Component {
 
     return (
       <Card className={cardClasses} style={rootStyle}>
-        {/* TODO: Transform this into an icon in the top-right corner */}
-        {/*<FlatButton
-          label={'Open'}
-          linkButton={true}
-          href={instanceUrl}
-          style={actionStyle}
-          className={s.action}
-          target="_blank"
-        />*/}
         <CardTitle
           title={`${instance.get('name')} - ${statusHuman}`}
           titleColor={color}
@@ -93,6 +84,7 @@ class InstanceItem extends Component {
         />
         <InstanceActions
           editing={editing}
+          instance={instance}
           onStartEditing={this.startEditing.bind(this)}
           onStopEditing={this.stopEditing.bind(this)}
           onSave={this.handleSave.bind(this, this.state.instance)}
