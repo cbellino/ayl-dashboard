@@ -4,7 +4,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles'
 import s from './IndexPage.scss'
 import InstanceListContainer from '../../containers/InstanceListContainer'
 
-const title = 'Dashboard - Adyoulike'
+const title = 'Tools - Adyoulike'
 
 class IndexPage extends Component {
 
