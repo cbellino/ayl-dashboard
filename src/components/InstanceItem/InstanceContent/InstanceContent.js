@@ -34,7 +34,7 @@ const InstanceContent = ({ instance, editing }) => {
 
   return (
     !editing ? (
-      <CardText>
+      <CardText className={s.root}>
         <p className={s.comment}>{instance.get('comment')}</p>
         {'Updated '}{dateNode}
         {' by '}{userLinkNode}{'.'}
