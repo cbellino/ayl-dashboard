@@ -30,11 +30,16 @@ export const addInstance = (instance) => {
 }
 
 export const updateInstance = (instance) => {
-  instance.set('updated_at', Firebase.ServerValue.TIMESTAMP)
+
+  // Set the last update date to now.
+  let date = new Date().getTime() / 1000
+  instance = instance.set('updated_at', date)
 
   // TODO: Rollback the instance if the update fails
   // TODO: Test this part.
-  instancesRef.update({ [instance.get('key')]: instance.toJS() })
+  instancesRef.update({
+    [instance.get('key')]: instance.toJS()
+  })
 
   return {
     type: actionTypes.UPDATE_INSTANCE,
