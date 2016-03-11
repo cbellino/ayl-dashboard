@@ -3,23 +3,20 @@ import './auto_mock_off'
 import Immutable from 'immutable'
 
 let matchers = {
+  toEqualImmutable: () => (
+    {
+      compare: (actual, expected) => {
+        let result = {
+          pass: Immutable.is(actual, expected),
+          message: `Expected ${actual ? actual.toString() : actual } to equal immutable ${expected ? expected.toString() : expected }`
+        }
 
-  toBeImmutable: function () {
-    const { actual } = this
-    return Immutable.Iterable.isIterable(actual)
-  },
-
-  toEqualImmutable: function (expected) {
-    const { actual } = this
-
-    this.message = () => {
-      return `Expected ${actual ? actual.toString() : actual } to equal immutable ${expected ? expected.toString() : expected }`
+        return result
+      }
     }
-
-    return Immutable.is(actual, expected)
-  }
+  )
 }
 
-jasmine.getEnv().beforeEach(function () {
-  this.addMatchers(matchers)
+jasmine.getEnv().beforeEach(() => {
+  jasmine.addMatchers(matchers)
 })

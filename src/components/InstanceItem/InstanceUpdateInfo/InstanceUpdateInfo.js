@@ -16,7 +16,7 @@ const InstanceUpdateInfo = ({ instance }) => {
       {'Updated on '}
       <span className={s.date}>
         <FormattedDate
-          value={new Date(updatedAt) * 1000}
+          value={new Date(updatedAt)}
           day="numeric"
           month="numeric"
           year="numeric"

@@ -10,7 +10,10 @@ const instance2 = { key: 'instance-2', name: 'instance 2' }
 describe('updateInstance', () => {
 
   it('return an object with a `type` prop of UPDATE_INSTANCE, and an `instance` prop of type Map', () => {
-    const instance = fromJS({ ...instance1, updated_at: 1456956439670 })
+    const baseTime = new Date()
+    jasmine.clock().mockDate(baseTime)
+
+    const instance = fromJS({ ...instance1, updated_at: baseTime })
     const action = updateInstance(instance)
 
     expect(action.type).toEqual(actionTypes.UPDATE_INSTANCE)
