@@ -10,15 +10,12 @@ import s from './InstanceItem.scss'
 import InstanceContent from './InstanceContent/InstanceContent'
 import InstanceForm from './InstanceForm/InstanceForm'
 import InstanceActions from './InstanceActions/InstanceActions'
+import InstanceUpdateInfo from './InstanceUpdateInfo/InstanceUpdateInfo'
 
 const statusColors = {
   locked: '#f8483e',
   used: '#eca839',
   free: '#70c752'
-}
-const subtitleStyle = {
-  fontWeight: '500',
-  WebkitFontSmoothing: 'antialiased'
 }
 
 class InstanceItem extends Component {
@@ -53,10 +50,6 @@ class InstanceItem extends Component {
     const { instance } = this.props
 
     const status = instance.get('status') || 'free'
-    const statusHuman = status === 'locked' ?
-      'locked' :
-      (status === 'used' ? 'in use' : 'free')
-
     const color = statusColors[status]
     const rootStyle = {
       borderColor: color
@@ -69,9 +62,9 @@ class InstanceItem extends Component {
     return (
       <Card className={cardClasses} style={rootStyle}>
         <CardTitle
-          title={`${instance.get('name')} - ${statusHuman}`}
+          title={<a title={'Open the instance'} href={instance.get('url')} target="_blank">{instance.get('name')}</a>}
+          subtitle={<InstanceUpdateInfo instance={instance} />}
           titleColor={color}
-          subtitleStyle={subtitleStyle}
         />
         <InstanceContent
           instance={instance}

@@ -1,9 +1,12 @@
 .root {
+  display: flex;
   border-top: 3px solid transparent;
   border-radius: 3px;
+  flex-direction: column;
 
   > div {
     display: flex;
+    flex: 1;
     flex-direction: column;
   }
 }

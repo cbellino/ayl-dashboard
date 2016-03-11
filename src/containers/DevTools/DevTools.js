@@ -16,11 +16,11 @@ import ChartIcon from 'material-ui/lib/svg-icons/hardware/device-hub'
 
 const DevTools = createDevTools(
   <MonitorsToolbar>
-    <SliderMonitor keyboardEnabled icon={<SliderIcon color={Colors.blue50} />} />
-    <LogMonitor theme="solarized" icon={<LogIcon color={Colors.blue50} />} />
-    <Dispatcher icon={<DispatcherIcon color={Colors.blue50} />} />
-    <DiffMonitor icon={<DiffIcon color={Colors.blue50} />} />
-    <ChartMonitor hasImmutables={true} icon={<ChartIcon color={Colors.blue50} />} />
+    <SliderMonitor keyboardEnabled icon={<SliderIcon color={Colors.white} />} />
+    <LogMonitor theme="solarized" icon={<LogIcon color={Colors.white} />} />
+    <Dispatcher icon={<DispatcherIcon color={Colors.white} />} />
+    <DiffMonitor icon={<DiffIcon color={Colors.white} />} />
+    <ChartMonitor hasImmutables={true} icon={<ChartIcon color={Colors.white} />} />
   </MonitorsToolbar>
 )
 

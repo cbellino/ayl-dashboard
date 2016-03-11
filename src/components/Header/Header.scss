@@ -1,22 +1,3 @@
 @import '../variables.scss';
 
-$brand-color: #61dafb;
-
-.root {
-  background: #373277;
-  color: #fff;
-}
-
-.container {
-  margin: 0 auto;
-  padding: 20px 12px;
-  max-width: $max-content-width;
-}
-
-.brandTxt {
-  margin-left: 10px;
-}
-
-.devTools {
-  float: right;
-}
+.root {}
