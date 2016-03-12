@@ -10,6 +10,12 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - g++-4.8
+cache:
+  directories:
+    - node_modules
 after_script:
   - npm install codeclimate-test-reporter
   - codeclimate-test-reporter < coverage/lcov.info
+after_success:
+  - NODE_ENV=production npm run build -- --production --release
+  - NODE_ENV=production npm run deploy -- --production --release
