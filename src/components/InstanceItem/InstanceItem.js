@@ -80,7 +80,7 @@ class InstanceItem extends Component {
           instance={instance}
           onStartEditing={this.startEditing.bind(this)}
           onStopEditing={this.stopEditing.bind(this)}
-          onSave={this.handleSave.bind(this, instance)}
+          onSave={this.handleSave.bind(this, this.state.instance)}
         />
       </Card>
     )

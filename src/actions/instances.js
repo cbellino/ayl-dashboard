@@ -1,5 +1,5 @@
 import Firebase from 'firebase'
-import { fromJS } from 'immutable'
+import { fromJS, equals } from 'immutable'
 
 import actionTypes from '../constants/ActionTypes'
 import FirebaseConstant from '../constants/Firebase'
@@ -17,7 +17,7 @@ export const startListeningToInstances = () => {
 
     // Update the instance when it is changed.
     instancesRef.on('child_changed', (snapshot) => {
-      dispatch(updateInstance(recordFromSnapshot(snapshot)))
+      dispatch(setInstance(recordFromSnapshot(snapshot)))
     })
   }
 }
@@ -37,10 +37,17 @@ export const updateInstance = (instance) => {
 
   // TODO: Rollback the instance if the update fails
   // TODO: Test this part.
-  // instancesRef.update({
-  //   [instance.get('key')]: instance.toJS()
-  // })
+  instancesRef.update({
+    [instance.get('key')]: instance.toJS()
+  })
 
+  return {
+    type: actionTypes.UPDATE_INSTANCE,
+    instance: instance
+  }
+}
+
+export const setInstance = (instance) => {
   return {
     type: actionTypes.UPDATE_INSTANCE,
     instance: instance

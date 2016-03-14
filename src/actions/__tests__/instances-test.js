@@ -2,7 +2,7 @@ import '../../../tools/auto_mock_off'
 
 import { fromJS } from 'immutable'
 import actionTypes from '../../constants/ActionTypes'
-import { updateInstance, updateInstances } from '../instances'
+import { updateInstance, setInstance, updateInstances } from '../instances'
 
 const instance1 = { key: 'instance-1', name: 'instance 1' }
 const instance2 = { key: 'instance-2', name: 'instance 2' }
@@ -15,6 +15,18 @@ describe('updateInstance', () => {
 
     const instance = fromJS({ ...instance1, updated_at: baseTime })
     const action = updateInstance(instance)
+
+    expect(action.type).toEqual(actionTypes.UPDATE_INSTANCE)
+    expect(action.instance).toEqualImmutable(instance)
+  })
+
+})
+
+describe('setInstance', () => {
+
+  it('return an object with a `type` prop of UPDATE_INSTANCE, and an `instance` prop of type Map', () => {
+    const instance = fromJS(instance1)
+    const action = setInstance(instance)
 
     expect(action.type).toEqual(actionTypes.UPDATE_INSTANCE)
     expect(action.instance).toEqualImmutable(instance)
