@@ -50,12 +50,6 @@ const config = {
     new webpack.optimize.OccurenceOrderPlugin(),
   ],
 
-  presets: [
-    require.resolve("babel-preset-es2015"),
-    require.resolve("babel-preset-stage-0"),
-    require.resolve("babel-preset-react")
-  ],
-
   resolve: {
     extensions: ['', '.webpack.js', '.web.js', '.js', '.jsx', '.json'],
   },
@@ -69,6 +63,16 @@ const config = {
           path.resolve(__dirname, '../src'),
         ],
         loader: 'babel-loader',
+        query: {
+          presets: [
+            'es2015',
+            'stage-0',
+            'react'
+          ],
+          plugins: [
+            'transform-runtime'
+          ]
+        }
       }, {
         test: /\.scss$/,
         loaders: [
@@ -175,7 +179,7 @@ const serverConfig = extend(true, {}, config, {
     __filename: false,
     __dirname: false,
   },
-  devtool: 'source-map',
+  devtool: DEBUG ? 'source-map' : 'cheap-module-eval-source-map',
   plugins: [
     new webpack.DefinePlugin({ ...GLOBALS, 'process.env.BROWSER': '"false"' }),
     new webpack.BannerPlugin('require("source-map-support").install();',

@@ -10,6 +10,7 @@
     "bluebird": "3.3.4",
     "chai": "^3.5.0",
     "classnames": "2.2.3",
+    "compression": "^1.6.1",
     "eventemitter3": "1.1.1",
     "express": "4.13.4",
     "fastclick": "1.0.6",

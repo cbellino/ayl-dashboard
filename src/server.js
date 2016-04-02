@@ -1,6 +1,7 @@
 import 'babel-polyfill'
 import path from 'path'
 import express from 'express'
+import compression from 'compression'
 import React from 'react'
 import ReactDOM from 'react-dom/server'
 import Router from './routes'
@@ -13,6 +14,7 @@ const server = global.server = express()
 //
 // Register Node.js middleware
 // -----------------------------------------------------------------------------
+server.use(compression())
 server.use(express.static(path.join(__dirname, 'public')))
 
 //
