@@ -2,7 +2,7 @@
 
 import React, { Component, cloneElement } from 'react'
 // TODO: Remove the dependency on material-ui.
-import IconButton from 'material-ui/lib/icon-button'
+import IconButton from 'material-ui/IconButton'
 
 const styles = {
   SliderMonitor: {

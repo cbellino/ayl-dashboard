@@ -47,4 +47,4 @@ InstanceUpdateInfo.propTypes = {
   instance: ImmutablePropTypes.map.isRequired
 }
 
-export default withStyles(InstanceUpdateInfo, s)
+export default withStyles(s)(InstanceUpdateInfo)

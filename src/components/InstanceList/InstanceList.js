@@ -22,4 +22,4 @@ InstanceList.propTypes = {
   instances: ImmutablePropTypes.list.isRequired
 }
 
-export default withStyles(InstanceList, s)
+export default withStyles(s)(InstanceList)

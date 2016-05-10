@@ -26,4 +26,4 @@ class IndexPage extends Component {
 
 }
 
-export default withStyles(IndexPage, s)
+export default withStyles(s)(IndexPage)

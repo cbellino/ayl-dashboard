@@ -1,7 +1,7 @@
 import React from 'react'
 import ImmutablePropTypes from 'react-immutable-proptypes'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
-import CardText from 'material-ui/lib/card/card-text'
+import { CardText } from 'material-ui/Card'
 
 import s from './InstanceContent.scss'
 
@@ -19,4 +19,4 @@ InstanceContent.propTypes = {
   instance: ImmutablePropTypes.map.isRequired
 }
 
-export default withStyles(InstanceContent, s)
+export default withStyles(s)(InstanceContent)

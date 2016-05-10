@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
 import ImmutablePropTypes from 'react-immutable-proptypes'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
-import Card from 'material-ui/lib/card/card'
-import CardTitle from 'material-ui/lib/card/card-title'
+import { Card, CardTitle } from 'material-ui/Card'
 import classnames from 'classnames'
 import ga from 'react-ga'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import s from './InstanceItem.scss'
 import InstanceContent from './InstanceContent/InstanceContent'
 import InstanceForm from './InstanceForm/InstanceForm'
 import InstanceActions from './InstanceActions/InstanceActions'
 import InstanceUpdateInfo from './InstanceUpdateInfo/InstanceUpdateInfo'
+import { defaultMuiTheme } from '../../config'
 
 const statusColors = {
   locked: '#f8483e',
@@ -60,29 +61,31 @@ class InstanceItem extends Component {
     })
 
     return (
-      <Card className={cardClasses} style={rootStyle}>
-        <CardTitle
-          title={<a title={'Open the instance'} href={instance.get('url')} target="_blank">{instance.get('name')}</a>}
-          subtitle={<InstanceUpdateInfo instance={instance} />}
-          titleColor={color}
-        />
-        <InstanceContent
-          instance={instance}
-          editing={editing}
-        />
-        <InstanceForm
-          instance={instance}
-          editing={editing}
-          onChange={this.handleChange.bind(this)}
-        />
-        <InstanceActions
-          editing={editing}
-          instance={instance}
-          onStartEditing={this.startEditing.bind(this)}
-          onStopEditing={this.stopEditing.bind(this)}
-          onSave={this.handleSave.bind(this, this.state.instance)}
-        />
-      </Card>
+      <MuiThemeProvider muiTheme={defaultMuiTheme}>
+        <Card className={cardClasses} style={rootStyle}>
+          <CardTitle
+            title={<a title={'Open the instance'} href={instance.get('url')} target="_blank">{instance.get('name')}</a>}
+            subtitle={<InstanceUpdateInfo instance={instance} />}
+            titleColor={color}
+          />
+          <InstanceContent
+            instance={instance}
+            editing={editing}
+          />
+          <InstanceForm
+            instance={instance}
+            editing={editing}
+            onChange={this.handleChange.bind(this)}
+          />
+          <InstanceActions
+            editing={editing}
+            instance={instance}
+            onStartEditing={this.startEditing.bind(this)}
+            onStopEditing={this.stopEditing.bind(this)}
+            onSave={this.handleSave.bind(this, this.state.instance)}
+          />
+        </Card>
+      </MuiThemeProvider>
     )
   }
 
@@ -92,4 +95,4 @@ InstanceItem.propTypes = {
   instance: ImmutablePropTypes.map.isRequired
 }
 
-export default withStyles(InstanceItem, s)
+export default withStyles(s)(InstanceItem)

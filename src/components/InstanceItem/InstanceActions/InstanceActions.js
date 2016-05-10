@@ -1,18 +1,17 @@
 import React, { PropTypes } from 'react'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
-import CardActions from 'material-ui/lib/card/card-actions'
-import IconButton from 'material-ui/lib/icon-button'
-import ModeEditIcon from 'material-ui/lib/svg-icons/editor/mode-edit'
-import CloseIcon from 'material-ui/lib/svg-icons/navigation/close'
-import CheckIcon from 'material-ui/lib/svg-icons/navigation/check'
-import getMuiTheme from 'material-ui/lib/styles/getMuiTheme'
+import { CardActions } from 'material-ui/Card'
+import IconButton from 'material-ui/IconButton'
+import ModeEditIcon from 'material-ui/svg-icons/editor/mode-edit'
+import CloseIcon from 'material-ui/svg-icons/navigation/close'
+import CheckIcon from 'material-ui/svg-icons/navigation/check'
+import { defaultMuiTheme } from '../../../config'
 
 import s from './InstanceActions.scss'
 
 const InstanceActions = ({ editing, onStartEditing, onStopEditing, onSave }) => {
 
-  const muiTheme = getMuiTheme()
-  const actionColor = muiTheme.baseTheme.palette.textColor
+  const actionColor = defaultMuiTheme.baseTheme.palette.textColor
 
   const saveButtonNode = editing ? (
     <IconButton
@@ -61,4 +60,4 @@ InstanceActions.propTypes = {
   onSave: PropTypes.func.isRequired
 }
 
-export default withStyles(InstanceActions, s)
+export default withStyles(s)(InstanceActions)

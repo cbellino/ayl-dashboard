@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import ImmutablePropTypes from 'react-immutable-proptypes'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
-import CardText from 'material-ui/lib/card/card-text'
-import TextField from 'material-ui/lib/text-field'
-import SelectField from 'material-ui/lib/select-field'
-import MenuItem from 'material-ui/lib/menus/menu-item'
+import { CardText } from 'material-ui/Card'
+import TextField from 'material-ui/TextField'
+import SelectField from 'material-ui/SelectField'
+import { MenuItem } from 'material-ui/Menu'
 
 import s from './InstanceForm.scss'
 
@@ -72,4 +72,4 @@ InstanceForm.propTypes = {
   instance: ImmutablePropTypes.map.isRequired
 }
 
-export default withStyles(InstanceForm, s)
+export default withStyles(s)(InstanceForm)
