@@ -49,6 +49,7 @@
     "whatwg-fetch": "1.0.0"
   },
   "devDependencies": {
+    "@kadira/storybook": "^1.24.0",
     "assets-webpack-plugin": "^3.4.0",
     "autoprefixer": "^6.3.3",
     "babel-cli": "^6.6.5",
@@ -90,6 +91,7 @@
     "react-addons-test-utils": "^15.0.2",
     "react-transform-catch-errors": "^1.0.2",
     "react-transform-hmr": "^1.0.4",
+    "react-with-context": "^1.0.2",
     "redbox-react": "^1.2.2",
     "replace": "^0.3.0",
     "ts-loader": "^0.8.1",
@@ -118,6 +120,7 @@
     "bundle": "babel-node tools/run bundle",
     "build": "babel-node tools/run build",
     "deploy": "babel-node tools/run deploy",
-    "start": "babel-node tools/run start"
+    "start": "babel-node tools/run start",
+    "storybook": "start-storybook -p 9001"
   }
 }

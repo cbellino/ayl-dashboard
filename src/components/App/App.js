@@ -53,7 +53,7 @@ class App extends Component {
       <Provider store={store}>
         <IntlProvider locale={'en'}>
           <div>
-            <Header />
+            <Header showDevTools={process.env.NODE_ENV !== 'production'} />
             {this.props.children}
           </div>
         </IntlProvider>
