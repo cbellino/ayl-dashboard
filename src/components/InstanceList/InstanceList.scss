@@ -3,24 +3,23 @@
 .root {
   display: flex;
   flex-wrap: wrap;
-  padding: 8px;
+  padding: 8px 0;
 
-   > div {
-     margin: 16px 0 0 16px;
-     width: calc(100% - 16px);
-     max-width: calc(100% - 16px);
-     min-width: calc(100% - 16px);
+  > div {
+    margin-left: 8px;
+    margin-right: 8px;
 
-     @media (min-width: $layout-breakpoint-xs) {
-       width: calc(50% - 16px);
-       max-width: calc(50% - 16px);
-       min-width: calc(50% - 16px);
-     }
+    @media (min-width: $layout-breakpoint-xs) {
+      margin-right: 0;
+      width: calc(50% - 12px);
+      max-width: calc(50% - 12px);
+      min-width: calc(50% - 12px);
+    }
 
-     @media (min-width: $layout-breakpoint-md) {
-       width: calc(33% - 13px);
-       max-width: calc(33% - 13px);
-       min-width: calc(33% - 13px);
-     }
-   }
+    @media (min-width: $layout-breakpoint-md) {
+      width: calc(33% - 6px);
+      max-width: calc(33% - 6px);
+      min-width: calc(33% - 6px);
+    }
+  }
 }
