@@ -36,8 +36,10 @@ class Html extends Component {
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <title>{this.props.title}</title>
+        <meta name="theme-color" content="#00bcd4" />
         <meta name="description" content={this.props.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="manifest" href="manifest.json" />
         <link rel="apple-touch-icon" href="apple-touch-icon.png" />
         <style id="css" dangerouslySetInnerHTML={{ __html: this.props.css }} />
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,400italic,300italic,300,500,500italic,700,700italic" rel="stylesheet" type="text/css" />

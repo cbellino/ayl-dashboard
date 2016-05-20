@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import emptyFunction from 'fbjs/lib/emptyFunction'
 import { Provider } from 'react-redux'
 import { IntlProvider } from 'react-intl'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import { defaultMuiTheme } from '../../config'
 
 import s from './App.scss'
 import Header from '../Header/Header'
@@ -52,10 +54,12 @@ class App extends Component {
     return (
       <Provider store={store}>
         <IntlProvider locale={'en'}>
-          <div>
-            <Header showDevTools={process.env.NODE_ENV !== 'production'} />
-            {this.props.children}
-          </div>
+          <MuiThemeProvider muiTheme={defaultMuiTheme}>
+            <div>
+              <Header showDevTools={process.env.NODE_ENV !== 'production'} />
+              {this.props.children}
+            </div>
+          </MuiThemeProvider>
         </IntlProvider>
       </Provider>
     )

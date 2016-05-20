@@ -1,24 +1,84 @@
+// Module
 .root {
   display: flex;
-  border-top: 3px solid transparent;
-  border-radius: 3px;
-  flex-direction: column;
+  flex-direction: row;
+  transition: all 200ms cubic-bezier(0.4, 0.0, 0.2, 1) 0ms;
+  box-sizing: border-box;
+  font-family: Roboto, sans-serif;
+  box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+  border-radius: 2px;
+  margin-bottom: 8px;
+  position: relative;
+  width: 100%;
+  min-height: 0;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 1);
+}
 
-  > div {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
+// Components
+.mainContent {
+  padding: 16px;
+  flex: auto;
+}
+
+.primaryText {
+  margin: 0;
+  padding: 0;
+  font-size: 1.5em;
+  font-weight: 400;
+}
+
+.subtext {
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+  font-weight: 300;
+  opacity: 0.8;
+}
+
+.content {
+  margin-top: 16px;
+  font-size: 0.9em;
+  opacity: 0.5;
+}
+
+.image {
+  min-width: 80px;
+  border-radius: 0 2px 2px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  path {
+    fill: rgba(0, 0, 0, 0.2);
   }
 }
 
-.expanded {}
+.number {
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 4em;
+  text-transform: uppercase;
+}
 
-a {
-  color: inherit;
-  font-weight: 400;
-  text-decoration: none;
+// Variants
+.status_free .image {
+  background: #2e7d32;
+}
 
-  &:hover {
-    text-decoration: underline;
-  }
+.status_used .image {
+  background: #f9a825;
+}
+
+.status_locked .image {
+  background: #c62828;
+}
+
+// States
+.expanded {
+  min-height: 220px;
 }

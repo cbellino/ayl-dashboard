@@ -1,0 +1,15 @@
+{
+  "name": "Previews",
+  "start_url": "index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#222222",
+  "icons": [
+    {
+      "src": "tile.png",
+      "sizes": "558x558",
+      "type": "image/png",
+      "density": 1.0
+    }
+  ]
+}

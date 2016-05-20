@@ -1,94 +1,88 @@
 import React, { Component } from 'react'
 import ImmutablePropTypes from 'react-immutable-proptypes'
+import { animateScroll } from 'react-scroll'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
-import { Card, CardTitle } from 'material-ui/Card'
 import classnames from 'classnames'
-import ga from 'react-ga'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import FreeIcon from 'material-ui/svg-icons/navigation/check'
+import InUseIcon from 'material-ui/svg-icons/action/change-history'
+import LockedIcon from 'material-ui/svg-icons/action/lock-outline'
 
 import s from './InstanceItem.scss'
-import InstanceContent from './InstanceContent/InstanceContent'
-import InstanceForm from './InstanceForm/InstanceForm'
-import InstanceActions from './InstanceActions/InstanceActions'
-import InstanceUpdateInfo from './InstanceUpdateInfo/InstanceUpdateInfo'
-import { defaultMuiTheme } from '../../config'
 
-const statusColors = {
-  locked: '#f8483e',
-  used: '#eca839',
-  free: '#70c752'
-}
+const OFFSET_TOP = 64
+const MARGIN_TOP = 8
+const EXPAND_ANIMATION_DURATION = 200
+const SCROLL_DURATION = 150
 
 class InstanceItem extends Component {
 
   constructor() {
     super()
-    this.state = { editing: false }
+    this.state = { expanded: false }
   }
 
-  startEditing() {
-    ga.event( { category: 'Instance', action: 'Start editing' } )
-    this.setState({ editing: true })
+  expand() {
+    this.setState({ expanded: !this.state.expanded })
+    return new Promise(resolve => {
+      setTimeout(resolve, EXPAND_ANIMATION_DURATION)
+    })
   }
 
-  stopEditing() {
-    ga.event( { category: 'Instance', action: 'Stop editing' } )
-    this.setState({ editing: false })
+  scrollIntoView() {
+    let top = this.rootElement.offsetTop - OFFSET_TOP - MARGIN_TOP
+    return new Promise(resolve => {
+      animateScroll.scrollTo(top, { duration: SCROLL_DURATION, smooth: true })
+      setTimeout(resolve, SCROLL_DURATION)
+    })
   }
 
-  handleChange(instance) {
-    this.setState({ instance: instance })
+  // TODO: Do this in a separate file that handles only animations ?
+  // TODO: Reduce other items.
+  toggleExpanded() {
+    this.expand()
+      .then(this.scrollIntoView.bind(this))
+      .then(() => console.debug('Transition done.'))
   }
 
-  handleSave(instance) {
-    ga.event( { category: 'Instance', action: 'Save' } )
-    this.setState({ editing: false })
-    this.props.onSave(instance)
+  // TODO: Transform this into a component.
+  statusIcon() {
+    const { instance } = this.props
+    switch(instance.get('status')) {
+      case 'locked':
+        return <LockedIcon />
+      case 'used':
+        return <InUseIcon />
+      default:
+        return <FreeIcon />
+    }
   }
 
   render() {
-    const { editing } = this.state
+    const { expanded } = this.state
     const { instance } = this.props
-
-    const status = instance.get('status') || 'free'
-    const color = statusColors[status]
-    const rootStyle = {
-      borderColor: color
-    }
-    const cardClasses = classnames({
+    const rootClasses = classnames({
       [s.root]: true,
-      [s.expanded]: editing
+      [s.expanded]: expanded,
+      [s[`status_${instance.get('status')}`]]: true
     })
 
     return (
-      <MuiThemeProvider muiTheme={defaultMuiTheme}>
-        <Card className={cardClasses} style={rootStyle}>
-          <CardTitle
-            title={<a title={'Open the instance'} href={instance.get('url')} target="_blank">{instance.get('name')}</a>}
-            subtitle={<InstanceUpdateInfo instance={instance} />}
-            titleColor={color}
-          />
-          <InstanceContent
-            instance={instance}
-            editing={editing}
-          />
-          <InstanceForm
-            instance={instance}
-            editing={editing}
-            onChange={this.handleChange.bind(this)}
-          />
-          <InstanceActions
-            editing={editing}
-            instance={instance}
-            onStartEditing={this.startEditing.bind(this)}
-            onStopEditing={this.stopEditing.bind(this)}
-            onSave={this.handleSave.bind(this, this.state.instance)}
-          />
-        </Card>
-      </MuiThemeProvider>
+      <div
+        className={rootClasses}
+        onClick={this.toggleExpanded.bind(this)}
+        ref={(ref) => this.rootElement = ref}
+      >
+        <div className={s.mainContent}>
+          <h2 className={s.primaryText}>{instance.get('name')}</h2>
+          <h4 className={s.subtext}>{instance.get('requested_by')}</h4>
+          <div className={s.content}>{instance.get('comment')}</div>
+        </div>
+        <div className={s.image}>
+          {this.statusIcon()}
+        </div>
+      </div>
     )
   }
-
 }
 
 InstanceItem.propTypes = {
