@@ -1,6 +1,5 @@
 {
   "name": "Previews",
-  "start_url": "index.html",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#222222",

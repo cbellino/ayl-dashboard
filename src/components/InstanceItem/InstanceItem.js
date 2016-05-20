@@ -4,7 +4,7 @@ import { animateScroll } from 'react-scroll'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
 import classnames from 'classnames'
 import FreeIcon from 'material-ui/svg-icons/navigation/check'
-import InUseIcon from 'material-ui/svg-icons/action/change-history'
+import InUseIcon from 'material-ui/svg-icons/action/schedule'
 import LockedIcon from 'material-ui/svg-icons/action/lock-outline'
 
 import s from './InstanceItem.scss'
