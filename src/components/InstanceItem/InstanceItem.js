@@ -3,11 +3,12 @@ import ImmutablePropTypes from 'react-immutable-proptypes'
 import { animateScroll } from 'react-scroll'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
 import classnames from 'classnames'
-import FreeIcon from 'material-ui/svg-icons/navigation/check'
-import InUseIcon from 'material-ui/svg-icons/action/schedule'
-import LockedIcon from 'material-ui/svg-icons/action/lock-outline'
+import EditIcon from 'material-ui/svg-icons/image/edit'
+import SaveIcon from 'material-ui/svg-icons/navigation/check'
+import ga from 'react-ga'
 
 import s from './InstanceItem.scss'
+import InstanceForm from './InstanceForm/InstanceForm'
 
 const OFFSET_TOP = 64
 const MARGIN_TOP = 8
@@ -18,11 +19,11 @@ class InstanceItem extends Component {
 
   constructor() {
     super()
-    this.state = { expanded: false }
+    this.state = { editing: false }
   }
 
   expand() {
-    this.setState({ expanded: !this.state.expanded })
+    this.setState({ editing: !this.state.editing })
     return new Promise(resolve => {
       setTimeout(resolve, EXPAND_ANIMATION_DURATION)
     })
@@ -36,49 +37,65 @@ class InstanceItem extends Component {
     })
   }
 
-  // TODO: Do this in a separate file that handles only animations ?
-  // TODO: Reduce other items.
-  toggleExpanded() {
-    this.expand()
-      .then(this.scrollIntoView.bind(this))
-      .then(() => console.debug('Transition done.'))
-  }
-
-  // TODO: Transform this into a component.
-  statusIcon() {
-    const { instance } = this.props
-    switch(instance.get('status')) {
-      case 'locked':
-        return <LockedIcon />
-      case 'used':
-        return <InUseIcon />
-      default:
-        return <FreeIcon />
+  toggleEditing() {
+    if (this.state.editing) {
+      this.save(this.state.instance)
+    } else {
+      this.edit()
     }
   }
 
+  // TODO: Do this in a separate file that handles only animations ?
+  // TODO: Reduce other items.
+  edit() {
+    this.expand()
+      .then(this.scrollIntoView.bind(this))
+      .then(() => {
+        ga.event( { category: 'Instance', action: 'Start editing' } )
+        this.setState({ editing: true })
+      })
+  }
+
+  save(instance) {
+    ga.event( { category: 'Instance', action: 'Save' } )
+    this.setState({ editing: false })
+    this.props.onSave(instance)
+  }
+
+  handleChange(instance) {
+    this.setState({ instance: instance })
+  }
+
   render() {
-    const { expanded } = this.state
+    const { editing } = this.state
     const { instance } = this.props
     const rootClasses = classnames({
       [s.root]: true,
-      [s.expanded]: expanded,
+      [s.editing]: editing,
       [s[`status_${instance.get('status')}`]]: true
     })
 
     return (
       <div
         className={rootClasses}
-        onClick={this.toggleExpanded.bind(this)}
         ref={(ref) => this.rootElement = ref}
       >
         <div className={s.mainContent}>
-          <h2 className={s.primaryText}>{instance.get('name')}</h2>
-          <h4 className={s.subtext}>{instance.get('requested_by')}</h4>
-          <div className={s.content}>{instance.get('comment')}</div>
+          {!editing ? (
+            <div>
+              <h2 className={s.primaryText}>{instance.get('name')}</h2>
+              <h4 className={s.subtext}>{instance.get('requested_by')}</h4>
+              <div className={s.content}>{instance.get('comment')}</div>
+            </div>
+          ) : (
+            <InstanceForm
+              instance={instance}
+              onChange={this.handleChange.bind(this)}
+            />
+          )}
         </div>
-        <div className={s.image}>
-          {this.statusIcon()}
+        <div className={s.image} onClick={this.toggleEditing.bind(this)}>
+          {editing ? <SaveIcon /> : <EditIcon />}
         </div>
       </div>
     )
