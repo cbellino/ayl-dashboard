@@ -120,7 +120,7 @@
     "bundle": "babel-node tools/run bundle",
     "build": "babel-node tools/run build",
     "deploy": "babel-node tools/run deploy",
-    "start": "babel-node tools/run start",
-    "storybook": "start-storybook -p 9001"
+    "storybook": "start-storybook -p 9001",
+    "start": "babel-node tools/run start"
   }
 }
