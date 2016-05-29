@@ -1,5 +1,7 @@
 @import '../variables.scss';
 
-body {
-  background: rgba(194, 220, 255, 0.2);
+.root {
+  padding-top: 64px;
+  display: flex;
+  justify-content: center;
 }

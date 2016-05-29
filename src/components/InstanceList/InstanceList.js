@@ -8,7 +8,10 @@ import InstanceItemContainer from '../../containers/InstanceItemContainer'
 const InstanceList = ({ instances }) => {
 
   const instanceNodes = instances.map((instance) =>
-    <InstanceItemContainer key={instance.get('key')} instance={instance} />
+    <InstanceItemContainer
+      key={instance.get('key')}
+      instance={instance}
+    />
   )
 
   return (

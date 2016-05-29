@@ -37,24 +37,29 @@ class InstanceForm extends Component {
     const { instance } = this.state
 
     return (
-      this.props.editing ? (
-        <CardText className={s.root}>
+      <CardText className={s.root}>
+        <div className={s.author}>
+          <TextField
+            floatingLabelText={'Author'}
+            defaultValue={instance.get('requested_by')}
+            onChange={this.handleDeveloperChange.bind(this)}
+            fullWidth={true}
+          />
+        </div>
+        <div className={s.status}>
           <SelectField
             floatingLabelText={'Status'}
             value={instance.get('status')}
             onChange={this.handleStatusChange.bind(this)}
             fullWidth={true}
+            className={s.status}
           >
             <MenuItem value={'free'} primaryText="Free" />
             <MenuItem value={'used'} primaryText="In use" />
             <MenuItem value={'locked'} primaryText="Locked" />
           </SelectField>
-          <TextField
-            floatingLabelText={'Developer'}
-            defaultValue={instance.get('requested_by')}
-            onChange={this.handleDeveloperChange.bind(this)}
-            fullWidth={true}
-          />
+        </div>
+        <div className={s.comment}>
           <TextField
             floatingLabelText={'Comment'}
             defaultValue={instance.get('comment')}
@@ -62,8 +67,8 @@ class InstanceForm extends Component {
             multiLine={true}
             fullWidth={true}
           />
-        </CardText>
-      ) : null
+        </div>
+      </CardText>
     )
   }
 }
