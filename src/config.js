@@ -4,4 +4,10 @@ export const port = process.env.PORT || 5000
 export const host = process.env.WEBSITE_HOSTNAME || `localhost:${port}`
 export const googleAnalyticsId = process.env.GA_ID || 'UA-XXXXX-X'
 export const firebaseURL = process.env.FIREBASE_URL || 'https://ayl-dashboard-dev.firebaseio.com'
-export const defaultMuiTheme = getMuiTheme()
+export const defaultMuiTheme = getMuiTheme({
+  palette: {
+    primary1Color: '#219ed2',
+    primary2Color: '#1b80aa',
+    accent1Color: '#ffcc80'
+  }
+})

@@ -20,7 +20,7 @@ const instancesReducer = (state = INITIAL_STATE, action = {}) => {
 
 export const addInstance = (state = List(), instance) => {
   // FIXME: Find out why corrupted data are saved and remove this quick fix!
-  if (instance.get('key') === 'undefined') {
+  if (instance.get('key') === 'undefined' || instance.get('key') === undefined) {
     return state
   }
   return state.push(Map(instance))
